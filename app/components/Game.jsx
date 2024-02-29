@@ -25,7 +25,7 @@ const Game = () => {
       </div>
 
       <div>
-        <div className="flex justify-center items-center mt-10">
+        <div className="flex justify-center items-center mt-2">
           <span className="text-[#C4C4C4]">Select Price</span>
         </div>
         <div className="flex	justify-center items-left mt-4">
