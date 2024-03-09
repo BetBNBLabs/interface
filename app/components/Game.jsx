@@ -57,7 +57,7 @@ const Game = () => {
                     <button
                         className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, coinSide: "[0]" })
+                            setInputs({ ...inputs, coinSide: "[1]" })
                         }
                     >
                         Tails
@@ -73,7 +73,7 @@ const Game = () => {
                     <button
                         className="bg-white font-bold py-2 px-4 mr-4 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, amount: "[0]" })
+                            setInputs({ ...inputs, amount: "0.1" })
                         }
                     >
                         .1BNB
@@ -81,7 +81,7 @@ const Game = () => {
                     <button
                         className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, amount: "[0]" })
+                            setInputs({ ...inputs, amount: "0.5" })
                         }
                     >
                         .5BNB
@@ -89,7 +89,7 @@ const Game = () => {
                     <button
                         className="bg-white font-bold py-2 px-4 ml-8 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, amount: "[0]" })
+                            setInputs({ ...inputs, amount: "1" })
                         }
                     >
                         1BNB
@@ -113,12 +113,12 @@ const Game = () => {
                             setInputs({ ...inputs, multiplier: "[0]" })
                         }
                     >
-                        2x
+                        1x
                     </button>
                     <button
                         className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, multiplier: "[0]" })
+                            setInputs({ ...inputs, multiplier: "[1]" })
                         }
                     >
                         5x
@@ -126,7 +126,7 @@ const Game = () => {
                     <button
                         className="bg-white font-bold py-2 px-4 ml-8 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, multiplier: "[0]" })
+                            setInputs({ ...inputs, multiplier: "[2]" })
                         }
                     >
                         10x

@@ -52,7 +52,8 @@ export async function createAccount() {
 
 export async function flipCoin(_multiplier, _amount, _coinSide) {
     const contract = await getFlipFactoryContract()
-    const tx = await contract.flipaCoin(_multiplier, _amount, _coinSide)
+    const weiAmount = ethers.utils.parseUnits(_amount.toString(), "ether");
+    const tx = await contract.flipaCoin(_multiplier, weiAmount, _coinSide)
     await tx.wait();
     console.log("Account Created");
 }
