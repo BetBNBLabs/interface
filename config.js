@@ -1,5 +1,7 @@
-export const bnbAddress = ``
+const bnbAddress = ``
 
-export const polygonAddress = ``
+const polygonAddress = ``
 
-export const FactoryABI = ``
+export const addressFactory = bnbAddress
+
+export const abiFactory = ``
