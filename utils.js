@@ -5,8 +5,6 @@ import {
     addressFactory,
     abiFactory,
 } from "./config";
-// import axios from "axios";
-import { create } from "@web3-storage/w3up-client";
 
 export async function getUserAddress() {
     const accounts = await window.ethereum.request({
@@ -36,10 +34,25 @@ async function getFlipFactoryContract() {
     return contract;
 }
 
-export async function isExistingUser() {}
-
-export async function createAccount() {}
-
-export async function flipCoin() {
+export async function isExistingUser() {
     const contract = await getFlipFactoryContract()
+    const address = await getUserAddress()
+    const data = await contract.userAddressToContractAddress(address)
+
+    console.log("isExisting: ", data)
+    return data
+}
+
+export async function createAccount() {
+    const contract = await getFlipFactoryContract()
+    const tx = await contract.createflips()
+    await tx.wait();
+    console.log("Account Created");
+}
+
+export async function flipCoin(_multiplier, _amount, _coinSide) {
+    const contract = await getFlipFactoryContract()
+    const tx = await contract.flipaCoin(_multiplier, _amount, _coinSide)
+    await tx.wait();
+    console.log("Account Created");
 }
