@@ -1,10 +1,42 @@
-const bnbAddress = ``
+const bnbAddress = ``;
 
-const polygonAddress = `0xA53C379D54E910F54626C062f691edBD24C7D4bD`
+const polygonAddress = `0xA53C379D54E910F54626C062f691edBD24C7D4bD`;
+const polygonCustomTokenAddress = `0xD3D083464D63a6a0d78a0DdE1F804e7233e8d977`
 
-export const addressFactory = polygonAddress
+export const addressFactory = polygonAddress;
+export const addressCustomToken = polygonCustomTokenAddress;
 
-export const abiFactory = [
+export const abiApproveFunction = `
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+`;
+
+export const abiFactory = `
+[
 	{
 		"inputs": [],
 		"name": "changeProb",
@@ -264,4 +296,5 @@ export const abiFactory = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-]`
+]
+`;

@@ -2,25 +2,27 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
-import { createAccount, isExistingUser } from "@/utils";
+import { createAccount, isExistingUser, flipCoin } from "@/utils";
 
 const Game = () => {
-    const [flip, setFlip] = useState(false);
+    const [flip, setFlip] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const [inputs, setInputs] = useState({
-        multiplier: null,
-        amount: null,
-        coinSide: null,
+        multiplier: "0",
+        amount: "0.1",
+        coinSide: "0",
     });
+
+    console.log(inputs)
 
     async function flipCall() {
         setFlip(!flip);
         setLoading(true);
         const isExisting = await isExistingUser();
-        if (isExisting == false) {
-            await createAccount();
-        }
+        // if (isExisting.toString() == "0x0000000000000000000000000000000000000000") {
+        //     await createAccount();
+        // }
         await flipCoin(inputs.multiplier, inputs.amount, inputs.coinSide);
         setLoading(false);
         setFlip(null);
@@ -49,7 +51,7 @@ const Game = () => {
                     <button
                         className="bg-white font-bold py-2 px-4 mr-4 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, coinSide: "[0]" })
+                            setInputs({ ...inputs, coinSide: "0" })
                         }
                     >
                         Heads
@@ -57,7 +59,7 @@ const Game = () => {
                     <button
                         className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, coinSide: "[1]" })
+                            setInputs({ ...inputs, coinSide: "1" })
                         }
                     >
                         Tails
@@ -110,7 +112,7 @@ const Game = () => {
                     <button
                         className="bg-white font-bold py-2 px-4 mr-4 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, multiplier: "[0]" })
+                            setInputs({ ...inputs, multiplier: "0" })
                         }
                     >
                         1x
@@ -118,7 +120,7 @@ const Game = () => {
                     <button
                         className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, multiplier: "[1]" })
+                            setInputs({ ...inputs, multiplier: "1" })
                         }
                     >
                         5x
@@ -126,7 +128,7 @@ const Game = () => {
                     <button
                         className="bg-white font-bold py-2 px-4 ml-8 rounded-full"
                         onClick={() =>
-                            setInputs({ ...inputs, multiplier: "[2]" })
+                            setInputs({ ...inputs, multiplier: "2" })
                         }
                     >
                         10x
