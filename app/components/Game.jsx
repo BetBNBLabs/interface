@@ -49,7 +49,7 @@ const Game = () => {
                 </div>
                 <div className="flex justify-center items-left mt-20">
                     <button
-                        className="bg-white font-bold py-2 px-4 mr-4 rounded-full"
+                        className="bg-outline border border-white text-white font-bold py-2 px-4 mr-4 rounded-full hover:text-black hover:bg-white"
                         onClick={() =>
                             setInputs({ ...inputs, coinSide: "0" })
                         }
@@ -57,7 +57,7 @@ const Game = () => {
                         Heads
                     </button>
                     <button
-                        className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full"
+                        className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black"
                         onClick={() =>
                             setInputs({ ...inputs, coinSide: "1" })
                         }
@@ -73,7 +73,8 @@ const Game = () => {
                 </div>
                 <div className="flex	justify-center items-left mt-4">
                     <button
-                        className="bg-white font-bold py-2 px-4 mr-4 rounded-full"
+                    className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 mr-4 rounded-full hover:text-black hover:bg-white"
+
                         onClick={() =>
                             setInputs({ ...inputs, amount: "0.1" })
                         }
@@ -81,7 +82,7 @@ const Game = () => {
                         .1BNB
                     </button>
                     <button
-                        className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full"
+                        className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black "
                         onClick={() =>
                             setInputs({ ...inputs, amount: "0.5" })
                         }
@@ -89,14 +90,14 @@ const Game = () => {
                         .5BNB
                     </button>
                     <button
-                        className="bg-white font-bold py-2 px-4 ml-8 rounded-full"
+                        className="bg-outline border-white border text-white hover:text-black hover:bg-white font-bold py-2 px-4 ml-8 rounded-full"
                         onClick={() =>
                             setInputs({ ...inputs, amount: "1" })
                         }
                     >
                         1BNB
                     </button>
-                    <button className="bg-outline text-white ml-8 border-white border font-bold py-2 px-4 rounded-full">
+                    <button className="bg-outline text-white ml-8 border-white border font-bold py-2 px-4 rounded-full hover:text-black hover:bg-white">
                         Custom amount
                     </button>
                 </div>
@@ -110,7 +111,7 @@ const Game = () => {
                 </div>
                 <div className="flex	justify-center items-left mt-4">
                     <button
-                        className="bg-white font-bold py-2 px-4 mr-4 rounded-full"
+                        className="bg-outline border border-white text-white font-bold py-2 px-4 mr-4 rounded-full hover:bg-white hover:text-black"
                         onClick={() =>
                             setInputs({ ...inputs, multiplier: "0" })
                         }
@@ -118,7 +119,7 @@ const Game = () => {
                         1x
                     </button>
                     <button
-                        className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full"
+                        className="bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black"
                         onClick={() =>
                             setInputs({ ...inputs, multiplier: "1" })
                         }
@@ -126,7 +127,7 @@ const Game = () => {
                         5x
                     </button>
                     <button
-                        className="bg-white font-bold py-2 px-4 ml-8 rounded-full"
+                        className="bg-outline border border-white text-white font-bold py-2 px-4 ml-8 rounded-full hover:text-black hover:bg-white"
                         onClick={() =>
                             setInputs({ ...inputs, multiplier: "2" })
                         }
