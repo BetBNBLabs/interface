@@ -16,7 +16,7 @@ export default function Home() {
     setIsPopupOpen(false);
   };
   return (
-    <div className="bg-[#090739] h-screen flex items-center justify-center">
+    <div className="bg-[#080638] min-h-screen flex items-center justify-center">
       <div
         className="bg-cover bg-center bg-fixed w-full h-full"
         style={{ backgroundImage: "url('/background.png')" }}
