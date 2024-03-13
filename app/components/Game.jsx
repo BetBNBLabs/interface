@@ -3,10 +3,23 @@ import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 import { createAccount, isExistingUser, flipCoin } from "@/utils";
+import styles from './CoinFlip.module.css'; // Import CSS module for styling
 
 const Game = () => {
-  const [flip, setFlip] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+  const [flipping, setFlipping] = useState(false);
+
+  const flipCoin = () => {
+    setFlipping(true);
+    setTimeout(() => {
+      const randomNumber = Math.random();
+      const coinResult = randomNumber < 0.5 ? 'Heads' : 'Tails';
+      setResult(coinResult);
+      setFlipping(false);
+    }, 2000); // Simulating a coin flip animation
+  };
+
+
 
   const [inputs, setInputs] = useState({
     multiplier: "0",
@@ -32,21 +45,28 @@ const Game = () => {
     <div className="flex flex-col justify-center items-center min-h-[80vh] gap-[10%]">
       <div className="flex justify-center items-center flex-col">
         <div className="flex flex-col items-center">
-          <Image
+          {/* <Image
             src="/coin.svg"
             width={130}
             height={200}
             className={flip ? "animate-spin" : ""}
             alt="hello"
-          ></Image>
+          ></Image> */}
+            <div className={`${styles.coinInner} ${flipping ? styles.flipping : ''}`}>
+          <div className={`${styles.coinFace} ${styles.heads}`}></div>
+          <div className={`${styles.coinFace} ${styles.tails}`}></div>
+          </div>
+        
           <button
             className="bg-[#F86939] text-white font-bold py-2 px-4 rounded-full mb-2"
-            onClick={flipCall}
+            // onClick={flipCall}
+            onClick={flipCoin}
           >
             Flip Coin
           </button>
         </div>
       </div>
+       
 
       <div>
         <div className="flex justify-center items-left flex-col">

@@ -4,6 +4,7 @@ import Layer from "./components/Layer";
 import Navbar from "./components/Navbar";
 import Disclaimer from "./components/Disclaimer";
 import { useEffect, useState } from "react";
+import Won from "./components/Won";
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -22,6 +23,7 @@ export default function Home() {
         style={{ backgroundImage: "url('/background.png')" }}
       >
       <Disclaimer isOpen={isPopupOpen} onClose={closePopup} />
+      <Won onClose={closePopup} />
 
         <Navbar />
         <Layer />

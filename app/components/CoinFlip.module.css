@@ -1,0 +1,42 @@
+.coin {
+    perspective: 1000px;
+  }
+  
+  .coinInner {
+    width: 250px;
+    height: 250px;
+    transform-style: preserve-3d;
+    transition: transform 2s;
+  }
+  
+  .coinFace {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    backface-visibility: hidden;
+  }
+  
+  .heads {
+    background-image: url('/coin.svg'); /* Path to the image for heads */
+  }
+  
+  .tails {
+    background-image: url('/coin.svg'); /* Path to the image for tails */
+  }
+  
+  .flipping {
+    animation: flip 2s linear;
+  }
+  
+  @keyframes flip {
+    0% {
+      transform: rotateY(0deg);
+    }
+    50% {
+      transform: rotateY(180deg);
+    }
+    100% {
+      transform: rotateY(360deg);
+    }
+  }
+  
