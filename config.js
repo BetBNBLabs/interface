@@ -3,8 +3,12 @@ const bnbAddress = ``;
 const polygonAddress = `0xA53C379D54E910F54626C062f691edBD24C7D4bD`;
 const polygonCustomTokenAddress = `0xD3D083464D63a6a0d78a0DdE1F804e7233e8d977`
 
-export const addressFactory = polygonAddress;
-export const addressCustomToken = polygonCustomTokenAddress;
+const sepoliaAddress = `0x3F79108E948aac1e13e09823dBE49f2F048b312d`;
+const sepoliaCustomTokenAddress = `0x7d0A0087543B8Dd1725B907bF523a5D7103adfB8`
+
+
+export const addressFactory = sepoliaAddress;
+export const addressCustomToken = sepoliaCustomTokenAddress;
 
 export const abiApproveFunction = `
 [
@@ -12,31 +16,28 @@ export const abiApproveFunction = `
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "spender",
+				"name": "consumerAddress",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
 			}
 		],
-		"name": "approve",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
+		"name": "addConsumer",
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	}
-]
-`;
-
-export const abiFactory = `
-[
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "receivingWallet",
+				"type": "address"
+			}
+		],
+		"name": "cancelSubscription",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"inputs": [],
 		"name": "changeProb",
@@ -136,6 +137,19 @@ export const abiFactory = `
 	},
 	{
 		"inputs": [],
+		"name": "getContractAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "GetContractTokenBalance",
 		"outputs": [
 			{
@@ -144,6 +158,39 @@ export const abiFactory = `
 				"type": "uint256"
 			}
 		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getsubscriptionId",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "topUpSubscription",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transferLinkTokens",
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -253,6 +300,32 @@ export const abiFactory = `
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "subscriptionAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "subscriptionId",
+		"outputs": [
+			{
+				"internalType": "uint64",
+				"name": "",
+				"type": "uint64"
 			}
 		],
 		"stateMutability": "view",

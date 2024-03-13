@@ -7,7 +7,7 @@ import "@chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol";
 import "./chainlinkVRF.sol";
 
 
-contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
+contract subscriptionManager is VRFConsumerBaseV2 {
     VRFCoordinatorV2Interface COORDINATOR;
     LinkTokenInterface LINKTOKEN;
 
@@ -15,23 +15,24 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
 
     address link_token_contract = 0x779877A7B0D9E8603169DdbD7836e478b4624789;
 
-  
     bytes32 keyHash = 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
 
     uint32 callbackGasLimit = 100000;
 
     uint16 requestConfirmations = 3;
 
-    uint32 numWords = 2;
+    uint32 numWords = 1;
 
     // Storage parameters
     uint256[] public s_randomWords;
     uint256 public s_requestId;
     uint64 public s_subscriptionId;
-    address s_owner;
+    address public s_owner;
+    address public latestContract;
 
-    rolling[] public UserArray;
-    mapping(address => address) public userAddressToContractAddress;
+    chainlinkVRF[] public UserArray;
+
+    // mapping(address => address) public userAddressToContractAddress;
 
     constructor() VRFConsumerBaseV2(vrfCoordinator) {
         COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
@@ -42,9 +43,10 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
     }
 
     function createflips()public {
-        rolling userRoll = new rolling(s_subscriptionId);
+        chainlinkVRF userRoll = new chainlinkVRF(s_subscriptionId);
         UserArray.push(userRoll);
-        userAddressToContractAddress[msg.sender] = address(userRoll);
+        latestContract = address(userRoll);
+        // userAddressToContractAddress[msg.sender] = address(userRoll);
         addConsumer(address(userRoll));
     }
 
@@ -68,7 +70,7 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
     }
 
     // Create a new subscription when the contract is initially deployed.
-    function createNewSubscription() private onlyOwner {
+    function createNewSubscription() public onlyOwner {
         s_subscriptionId = COORDINATOR.createSubscription();
         // Add this contract as a consumer of its own subscription.
         COORDINATOR.addConsumer(s_subscriptionId, address(this));
@@ -111,6 +113,19 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
         require(msg.sender == s_owner);
         _;
     }
+
+    function getsubscriptionId() public view returns(uint64){
+       return s_subscriptionId;
+    }
+
+    function getContractAddress() public view returns(address){
+            return latestContract;
+    }
+
+    function changeOwnership(address owner) public {
+        s_owner = owner;
+    }
+    
 }
 
 
@@ -132,3 +147,7 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
 //         numWords
 //     );
 // }
+//0x2539D6b4114548583EBc9e1CEF882298c47DCf7d
+//0x127205Ee19222D6675200D075bD7FE3AA512cA46
+//0xbf0470dd00d764418c0aadb6a42049d3ec5e2afa
+// 0xe75667f3a8a65c909f24277f8dc38a2d069ca53e

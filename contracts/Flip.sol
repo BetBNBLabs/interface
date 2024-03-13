@@ -1,14 +1,27 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.18;
+
 import "./library.sol";
+import "./Ichainlink.sol";
 
 contract Flip {
 
     address owner;
+    address public chainlink;
+    Ichainlink GreeterContract; 
 
-    constructor(address user){
+    // 0xC83BF0315121E03544Fc71589EfA2BAc1334A6d1
+    // 0x97d3fDf05741AaF69A49A819E21A0eEfc5B95A01
+
+    constructor(address user,
+     address _chainlinkContractAddress
+    ){
         owner = user;
+        chainlink = _chainlinkContractAddress;
+        GreeterContract = Ichainlink(address(chainlink));
     }
+
+
 
     uint256 public probWin = 500;
     uint256 public probLose = 1000 - probWin;
@@ -42,7 +55,11 @@ contract Flip {
     }
 
     function sudoProbability() public view returns (uint256) {
-        bytes32 hash = keccak256(abi.encodePacked(block.number, block.timestamp, blockhash(block.number - 1),probWin, probLose, looseCount, winCount, owner));
+        // bytes32 hash = keccak256(abi.encodePacked(block.number, block.timestamp, blockhash(block.number - 1),probWin, probLose, looseCount, winCount, owner));
+        bool value;
+        uint256[] memory resultt;
+        (value, resultt) = getGetRequestStatus();
+        uint256 hash = resultt[0];
         // Convert the hash to a uint8 value (0 or 1)
         uint8 result = uint8(uint256(hash)) % 2;
         uint256 prob_Win = probWin;
@@ -68,8 +85,11 @@ contract Flip {
 
     // Function to generate a pseudo-random floating-point number between 0 to 100
     function generateRandomFloat() public view returns (uint256) {
-        bytes32 hash = keccak256(abi.encodePacked(block.number, block.timestamp, blockhash(block.number - 1),probWin, probLose, looseCount, winCount, owner));
-
+        // bytes32 hash = keccak256(abi.encodePacked(block.number, block.timestamp, blockhash(block.number - 1),probWin, probLose, looseCount, winCount, owner));
+         bool value;
+        uint256[] memory resultt;
+        (value, resultt) = getGetRequestStatus();
+        uint256 hash = resultt[0];
         // Convert the hash to a uint256 value and normalize it to be between 0 and 1
         uint256 randomNumber = uint256(hash) % 1000000;
         uint256 randomFloat = uint256(randomNumber) / 1000;
@@ -166,5 +186,34 @@ contract Flip {
         }
         return (results,winStreak);
     }
-    
+
+    uint256 public requestID;
+
+    function updateChainlink(address _chainlinkAddress) public {
+        chainlink = _chainlinkAddress;
+    }
+
+    function getRequestRandomWords() public returns(uint256){
+        // chainlinkVRF flip  = chainlinkVRF(chainlink);
+        requestID = GreeterContract.requestRandomWords();
+        return requestID;
+    }
+    // uint256 public hello;
+    // function getGetRequestStatus() public returns(bool fulfilled, uint256[] memory randomWords){
+    // bool value ;
+    // uint256[] memory result;
+    //     (value, result) = GreeterContract.getRequestStatus(requestID);
+    //     hello = result[0];
+    //     return(value, result);
+    // }
+
+    function getGetRequestStatus() public view returns(bool fulfilled, uint256[] memory randomWords){
+    bool value ;
+    uint256[] memory result;
+        (value, result) = GreeterContract.getRequestStatus(requestID);
+        // hello = result[0];
+        return(value, result);
+    }
+
+
 }
