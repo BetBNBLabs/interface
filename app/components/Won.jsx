@@ -12,9 +12,9 @@ const Won = ({ isOpen, onClose }) => {
     >
       <div className="bg-[#141414] text-white rounded-md p-6 w-50 mx-auto outline-none text-center">
         <div className='modal flex flex-col items-center justify-center'>
-        <h1 id="popup-title" className="disclaimer text-4xl">You've Won!</h1>
+        <h1 id="popup-title" className="disclaimer text-4xl">You&apos;ve Won!</h1>
         <p className="paragraph">
-        Congratulations! You've won $10.
+        Congratulations! You&apos;ve won $10.
         </p>
         <img className="items-center justify-center" src="/won.gif" alt="Winner GIF" />
         </div>

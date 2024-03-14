@@ -14,7 +14,7 @@ const Lost = ({ isOpen, onClose }) => {
         <div className='modal flex flex-col items-center justify-center'>
         <h1 id="popup-title" className="disclaimer text-4xl">Oops! You Lost!</h1>
         <p className="paragraph">
-        Sorry, you didn't win this time.        </p>
+        Sorry, you didn&apos;t win this time.        </p>
         <img className="items-center justify-center" src="/lost.gif" alt="Winner GIF" />
         </div>
         <button
