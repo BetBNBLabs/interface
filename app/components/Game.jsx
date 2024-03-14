@@ -95,36 +95,36 @@ const Game = () => {
         </div>
         <div className="flex justify-center items-left mt-4">
   <button
-    className={`bg-outline text-white ml-4 border-white border font-bold py-2 px-4 mr-4 rounded-full ${
-      inputs.amount === "0.1" ? "bg-white text-black" : ""
+    className={`bg-outline  ml-4 border-white border font-bold py-2 px-4 mr-4 rounded-full ${
+      inputs.amount === "0.1" ? "bg-white text-black" : "text-white"
     }`}
     onClick={() => setInputs({ ...inputs, amount: "0.1" })}
   >
     .1{" "}BNB
   </button>
   <button
-    className={`bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full ${
-      inputs.amount === "0.5" ? "bg-white text-black" : ""
+    className={`bg-outline  ml-4 border-white border font-bold py-2 px-4 rounded-full ${
+      inputs.amount === "0.5" ? "bg-white text-black" : "text-white"
     }`}
     onClick={() => setInputs({ ...inputs, amount: "0.5" })}
   >
     .5{" "}BNB
   </button>
   <button
-    className={`bg-outline border-white border text-white font-bold py-2 px-4 ml-8 rounded-full ${
-      inputs.amount === "1" ? "bg-white text-black" : ""
+    className={`bg-outline border-white border font-bold py-2 px-4 ml-8 rounded-full ${
+      inputs.amount === "1" ? "bg-white text-black" : "text-white"
     }`}
     onClick={() => setInputs({ ...inputs, amount: "1" })}
   >
     1{" "}BNB
   </button>
   <button
-    className={`bg-outline border-white border text-white hover:text-black hover:bg-white font-bold py-2 px-4 ml-8 rounded-full ${
+    className={`bg-outline border-white border  hover:bg-white hover:text-black font-bold py-2 px-4 ml-8 rounded-full ${
       inputs.amount !== "0.1" &&
       inputs.amount !== "0.5" &&
       inputs.amount !== "1"
         ? "bg-white text-black"
-        : ""
+        : "text-white"
     }`}
     onClick={() => {
       const customAmount = prompt("Enter custom amount:");
@@ -153,24 +153,24 @@ const Game = () => {
           </div>
           <div className="flex	justify-center items-left mt-4">
             <button
-              className={`bg-outline border border-white text-white font-bold py-2 px-4 mr-4 rounded-full hover:bg-white hover:text-black ${
-                inputs.multiplier === "0" ? "bg-white text-black" : ""
+              className={`bg-outline border border-white  font-bold py-2 px-4 mr-4 rounded-full hover:bg-white hover:text-black ${
+                inputs.multiplier === "0" ? "bg-white text-black" : "text-white"
               }`}
               onClick={() => setInputs({ ...inputs, multiplier: "0" })}
             >
               1x
             </button>
             <button
-              className={`bg-outline text-white ml-4 border-white border font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black ${
-                inputs.multiplier === "1" ? "bg-white text-black" : ""
+              className={`bg-outline  ml-4 border-white border font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black ${
+                inputs.multiplier === "1" ? "bg-white text-black" : "text-white"
               }`}
               onClick={() => setInputs({ ...inputs, multiplier: "1" })}
             >
               5x
             </button>
             <button
-              className={`bg-outline border border-white text-white font-bold py-2 px-4 ml-8 rounded-full hover:text-black hover:bg-white ${
-                inputs.multiplier === "2" ? "bg-white text-black" : ""}`}
+              className={`bg-outline border border-white  font-bold py-2 px-4 ml-8 rounded-full hover:text-black hover:bg-white ${
+                inputs.multiplier === "2" ? "bg-white text-black" : "text-white"}`}
               onClick={() => setInputs({ ...inputs, multiplier: "2" })}
             >
               10x

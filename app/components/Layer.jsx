@@ -2,13 +2,29 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-
+import Dropdown from "./DropDown";
 const Layer = () => {
     const [selectedOption, setSelectedOption] = useState(null);
+    const [showDropdown, setShowDropdown] = useState(false);
+
     const handleOptionSelect = (option) => {
         setSelectedOption(option);
     };
 
+    const toggleDropdown = () => {
+        setShowDropdown(!showDropdown);
+      };
+
+      const sections = [
+        {
+          heading: "Heading 1",
+          items: ["Item 1.1", "Item 1.2", "Item 1.3"]
+        },
+        {
+          heading: "Heading 2",
+          items: ["Item 2.1", "Item 2.2", "Item 2.3"]
+        }
+      ];
     return (
         <div>
             <header class=" body-font">
@@ -32,7 +48,8 @@ const Layer = () => {
                         </button>
                     </div>
                     <div className="ml-6">
-                        <button class="flex items-center bg-[#303030] border border-gray-300 text-white font-medium py-2 px-3 rounded-full focus:outline-none">
+                        <button class="flex items-center bg-[#303030] border border-gray-300 text-white font-medium py-2 px-3 rounded-full focus:outline-none" 
+                        onClick={toggleDropdown}>
                             <span>Recent</span>
                             <svg
                                 class="w-4 h-4 ml-2"
@@ -48,6 +65,15 @@ const Layer = () => {
                                 ></path>
                             </svg>
                         </button>
+                        {showDropdown && (
+          <Dropdown
+          sections={sections}
+
+            isOpen={showDropdown}
+            toggleDropdown={toggleDropdown}
+          />
+        )}
+
                     </div>
                     <Image
                         className="ml-4 mt-2"
