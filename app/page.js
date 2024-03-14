@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Disclaimer from "./components/Disclaimer";
 import { useEffect, useState } from "react";
 import Won from "./components/Won";
+import Footer from "./components/Footer";
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -28,6 +29,7 @@ export default function Home() {
         <Navbar />
         <Layer />
         <Game />
+        <Footer/>
       </div>
     </div>
   );

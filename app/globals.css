@@ -36,3 +36,26 @@
     color: white;
     text-align: center;
   }
+
+  .glass-container {
+   
+    background: rgba(0, 0, 0, 0.5); /* Adjust transparency here */
+    border-radius: 20px;
+    backdrop-filter: blur(10px); /* Adjust blur amount here */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .glass-container h2 {
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .glass-container p {
+    color: #ddd;
+    font-size: 16px;
+    text-align: center;
+  }
