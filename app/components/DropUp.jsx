@@ -13,7 +13,7 @@ const DropUp = () => {
   
    
           <div
-            className="origin-top-right absolute bg-black glass-container right-0 mt-2 w-56 rounded-md shadow-lg s ring-1 ring-black ring-opacity-5"
+            className="origin-top-right absolute bg-black glass-container right-18 z-50 mt-2 w-56 rounded-md shadow-lg s ring-1 ring-black ring-opacity-5 md:right-0"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"

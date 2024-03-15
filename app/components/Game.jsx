@@ -45,13 +45,7 @@ const Game = () => {
     <div className="flex flex-col justify-center items-center min-h-[80vh] gap-[10%]">
       <div className="flex justify-center items-center flex-col">
         <div className="flex flex-col items-center">
-          {/* <Image
-            src="/coin.svg"
-            width={130}
-            height={200}
-            className={flip ? "animate-spin" : ""}
-            alt="hello"
-          ></Image> */}
+        
             <div className={`${styles.coinInner} ${flipping ? styles.flipping : ''}`}>
           <div className={`${styles.coinFace} ${styles.heads}`}></div>
           <div className={`${styles.coinFace} ${styles.tails}`}></div>

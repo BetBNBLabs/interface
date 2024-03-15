@@ -17,11 +17,11 @@
   }
   
   .heads {
-    background-image: url('/coin.svg'); /* Path to the image for heads */
+    background-image: url('/Head.svg'); /* Path to the image for heads */
   }
   
   .tails {
-    background-image: url('/coin.svg'); /* Path to the image for tails */
+    background-image: url('/Head.svg'); /* Path to the image for tails */
   }
   
   .flipping {
