@@ -3,11 +3,17 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Dropdown from "./DropDown";
+import DropUp from './DropUp';
+
 const Layer = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [showDropdown1, setShowDropdown1] = useState(false);
 
+  const toggleDropdown1 = () => {
+      setShowDropdown1(!showDropdown1);
+    };
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
   };
@@ -43,16 +49,16 @@ const Layer = () => {
           </a>
           <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center"></nav>
           <div dir="ltr">
-            <button class="inline-flex items-center rounded-s-lg bg-[#F86939] border-0 text-white text-sm py-1 px-3 focus:outline-none mt-4 md:mt-0 ">
+            <button class="inline-flex items-center rounded-s-lg bg-[#F86939] border-0 text-white text-sm py-1 px-3 focus:outline-none mt-4 md:mt-0 hidden md:block">
               Heads (54%)
             </button>
           </div>
           <div dir="rtl">
-            <button class="inline-flex items-center rounded-s-lg bg-outline border border-white text-white py-1 px-3 text-sm mt-4 md:mt-0">
+            <button class="inline-flex items-center rounded-s-lg bg-outline border border-white text-white py-1 px-3 text-sm mt-4 md:mt-0 hidden md:block">
               Tails (49%)
             </button>
           </div>
-          <div className="ml-6">
+          <div className="ml-6 inline-flex">
             <button
               class="flex items-center bg-[#303030] border border-gray-300 text-white font-medium py-2 px-3 rounded-full focus:outline-none"
               onClick={toggleDropdown}
@@ -79,23 +85,19 @@ const Layer = () => {
                 toggleDropdown={toggleDropdown}
               />
             )}
+                <button className="ml-8" onClick={toggleDropdown1}>
+     <Image src="/game.svg" height={40} width={40}/>
+        
+        </button> 
+        {showDropdown1 && (
+              <DropUp
+                isOpen={showDropdown1}
+                toggleDropdown1={toggleDropdown1}
+              />
+            )}
           </div>
-          <button onMouseEnter={handleToggle}>
-          <Image
-            className="ml-4 mt-2"
-            src="/alert.svg"
-            width={40}
-            height={50}
-          />
-          </button>
-          {isOpen && (
-          <div className="absolute text-[0.8rem] left-[70%] mr-8 z-10 mt-2 py-2 bg-[#18181d] text-white rounded-xl border border-black/50 shadow-lg ">
-            <div className="flex justify-center items-center px-4 gap-2">
-              <p className="block py-2">More Games Coming Soon!</p>
-              
-            </div>
-          </div>
-        )}
+
+     
         </div>
       </header>
     </div>

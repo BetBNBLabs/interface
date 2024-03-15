@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import Disclaimer from "./components/Disclaimer";
 import { useEffect, useState } from "react";
 import Won from "./components/Won";
-import Footer from "./components/Footer";
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -20,7 +19,7 @@ export default function Home() {
   return (
     <div className="bg-[#080638] min-h-screen flex items-center justify-center">
       <div
-        className="bg-cover bg-center bg-fixed w-full h-full"
+        className="bg-cover bg-center bg-fixed w-full h-full absolute inset-0 overflow-hidden"
         style={{ backgroundImage: "url('/background.png')" }}
       >
       <Disclaimer isOpen={isPopupOpen} onClose={closePopup} />
@@ -29,7 +28,6 @@ export default function Home() {
         <Navbar />
         <Layer />
         <Game />
-        <Footer/>
       </div>
     </div>
   );

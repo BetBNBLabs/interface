@@ -8,7 +8,7 @@ const DropUp = () => {
     };
   
     return (
-      <div className="absolute md:left-[55%] lg:left-[80%] mt-4 text-left rotate-180">
+      <div className="absolute md:left-[55%] lg:left-[98%] mt-4 text-left ">
        
   
    
@@ -22,45 +22,45 @@ const DropUp = () => {
               <a href="#" className="block px-4 py-2" role="menuitem">
                 <div className="flex items-center">
                   <img
-                    className="h-10 w-10 rounded-full rotate-180"
-                    src="/crash.svg"
-                    alt=""
-                  />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-900 rotate-180">
-                      Coming Soon
-                    </p>
-                    <p className="text-sm text-gray-500 rotate-180">Crash</p>
-                  </div>
-                </div>
-              </a>
-              <a href="#" className="block px-4 py-2" role="menuitem">
-                <div className="flex items-center">
-                  <img
-                    className="h-10 w-10 rounded-full rotate-180"
-                    src="/spinwheel.svg"
-                    alt=""
-                  />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-900 rotate-180">
-                      Coming Soon
-                    </p>
-                    <p className="text-sm text-gray-500 rotate-180">Spin the Wheel</p>
-                  </div>
-                </div>
-              </a>
-              <a href="#" className="block px-4 py-2" role="menuitem">
-                <div className="flex items-center">
-                  <img
-                    className="h-10 w-10 rounded-full rotate-180"
+                    className="h-10 w-10 rounded-full "
                     src="/coinflip.svg"
                     alt=""
                   />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-900 rotate-180">
-                      Now Playing
+                    <p className="text-sm font-medium text-gray-900 ">
+                      BETBNB
                     </p>
-                    <p className="text-sm text-gray-500 rotate-180">BETBNB</p>
+                    <p className="text-sm text-gray-500 ">Now playing</p>
+                  </div>
+                </div>
+              </a>
+              <a href="#" className="block px-4 py-2" role="menuitem">
+                <div className="flex items-center">
+                  <img
+                    className="h-10 w-10 rounded-full "
+                    src="/spinwheel.svg"
+                    alt=""
+                  />
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-900 ">
+                      Spin Wheel
+                    </p>
+                    <p className="text-sm text-gray-500 ">Coming Soon</p>
+                  </div>
+                </div>
+              </a>
+              <a href="#" className="block px-4 py-2" role="menuitem">
+                <div className="flex items-center">
+                  <img
+                    className="h-10 w-10 rounded-full "
+                    src="/crash.svg"
+                    alt=""
+                  />
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-900 ">
+                    Crash
+                    </p>
+                    <p className="text-sm text-gray-500 ">Coming Soon</p>
                   </div>
                 </div>
               </a>
