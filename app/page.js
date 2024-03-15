@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className="bg-[#080638] min-h-screen flex items-center justify-center">
       <div
-        className="bg-cover bg-center bg-fixed w-full h-full absolute inset-0 overflow-hidden"
+        className="bg-cover bg-center bg-fixed w-full h-full absolute inset-0 overflow-auto"
         style={{ backgroundImage: "url('/background.png')" }}
       >
       <Disclaimer isOpen={isPopupOpen} onClose={closePopup} />
