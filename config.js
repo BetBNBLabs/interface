@@ -1,18 +1,51 @@
-const bnbAddress = `0x8fC7c67AdeB681f3077e17a8256dEd2B23a1Cd72`;
-const bnbCustomTokenAddress = `0x91E714f998B1AAe75b133E0467b5FAA2783f5D0A`
 
+const bscAddress = `0x8fC7c67AdeB681f3077e17a8256dEd2B23a1Cd72`;
 const polygonAddress = `0xA53C379D54E910F54626C062f691edBD24C7D4bD`;
-const polygonCustomTokenAddress = `0xD3D083464D63a6a0d78a0DdE1F804e7233e8d977`
-
 const sepoliaAddress = `0x3F79108E948aac1e13e09823dBE49f2F048b312d`;
+
+const bscCustomTokenAddress = `0x91E714f998B1AAe75b133E0467b5FAA2783f5D0A`
+const polygonCustomTokenAddress = `0xD3D083464D63a6a0d78a0DdE1F804e7233e8d977`
 const sepoliaCustomTokenAddress = `0x7d0A0087543B8Dd1725B907bF523a5D7103adfB8`
 
+const bscTestnetRPC = ``
+const mumbaiRPC = `https://polygon-mumbai.infura.io/v3/`
+const sepoliaRPC = ``
 
+export const RPCKey = `2HvD0iID3OjnCRpKjKpqXYMcdRV`
 
-export const addressFactory = sepoliaAddress;
-export const addressCustomToken = sepoliaCustomTokenAddress;
+export const addressFactory = bscAddress;
+export const addressCustomToken = bscCustomTokenAddress;
+export const jsonRPC = bscTestnetRPC
 
 export const abiApproveFunction = `
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]`
+
+export const abiFactory = `
 [
 	{
 		"inputs": [

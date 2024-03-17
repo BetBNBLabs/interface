@@ -5,7 +5,9 @@ import {
     addressFactory,
     abiFactory,
     addressCustomToken,
-    abiApproveFunction
+    abiApproveFunction,
+    jsonRPC,
+    RPCKey
 } from "./config";
 
 export async function getUserAddress() {
@@ -67,22 +69,32 @@ export async function approveToken(_spender, _amount) {
     console.log("Spender Approved")
 }
 
-export async function flipCoin(_multiplier, _amount, _coinSide) {
+export async function flipACoin(_multiplier, _amount, _coinSide) {
     const contract = await getFlipFactoryContract(true)
-    console.log("amount", _amount.toString())
+    console.log("ethers amount: ", _amount.toString())
     const weiAmount = ethers.utils.parseEther(_amount.toString());
-    // console.log("wei", weiAmount)
+    console.log("wei amount: ", weiAmount)
 
+    // console.log("create account")
     // await createAccount()
 
+    console.log("calling approve function")
     await approveToken(addressFactory, weiAmount)
+
     const d = await contract.GetAllowance()
     const d2 = ethers.utils.formatEther(d);
     console.log("allowance ", d2)
 
-    const tx = await contract.flipaCoin(_multiplier.toString(), weiAmount, _coinSide.toString(),{
-        gasLimit: 1000000,
-    })
-    await tx.wait();
-    console.log("Coin flipped", tx);
+    console.log("flipping")
+    console.log("inputs: ", _multiplier.toString(), weiAmount, _coinSide.toString())
+    const tx = await contract.flipACoin(_multiplier.toString(), weiAmount.toString(), _coinSide.toString()
+    , { gasLimit: 1000000, }
+    )
+    const data = await tx.wait();
+    const data2 = await data.events[1]
+
+    console.log("Coin flipped", data);
+    console.log("Coin data2: ", data2);
+    // console.log("results info:", tx.value.toString())
 }
+
