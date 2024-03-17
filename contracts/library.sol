@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.18;
 
 library coin {
+
     // enum Areas {
     //     Burrow, School, Forest, Mine, DeepMine, Trails
     // }
@@ -13,8 +14,6 @@ library coin {
     // enum Powers{
     //     EmptyHead, BrainPower, AxeStrength, Speed, Scavenge
     // }
-    enum Coin {
-        Heads,
-        Tails
-    }
+    enum Coin {Heads , Tails}
+    enum Multiplier {One, Five, Ten}
 }

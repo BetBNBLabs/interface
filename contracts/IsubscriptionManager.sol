@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 interface IsubscriptionManager {
 
-    function createflips() external ;
+    function createflips() external returns(address);
 
     function createNewSubscription() external ;
 

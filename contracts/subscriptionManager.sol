@@ -11,13 +11,13 @@ contract subscriptionManager is VRFConsumerBaseV2 {
     VRFCoordinatorV2Interface COORDINATOR;
     LinkTokenInterface LINKTOKEN;
 
-    address vrfCoordinator = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
+    address vrfCoordinator = 0x6A2AAd07396B36Fe02a22b33cf443582f682c82f;
 
-    address link_token_contract = 0x779877A7B0D9E8603169DdbD7836e478b4624789;
+    address link_token_contract = 0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06;
 
-    bytes32 keyHash = 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
+    bytes32 keyHash = 0xd4bb89654db74673a187bd804519e65e3f71a52bc55f11da7601a13dcf505314;
 
-    uint32 callbackGasLimit = 100000;
+    uint32 callbackGasLimit = 2500000;
 
     uint16 requestConfirmations = 3;
 
@@ -29,29 +29,33 @@ contract subscriptionManager is VRFConsumerBaseV2 {
     uint64 public s_subscriptionId;
     address public s_owner;
     address public latestContract;
+    address public factoryAddress;
 
     chainlinkVRF[] public UserArray;
 
     // mapping(address => address) public userAddressToContractAddress;
 
-    constructor() VRFConsumerBaseV2(vrfCoordinator) {
+    constructor(address _factoryAddress) VRFConsumerBaseV2(vrfCoordinator) {
         COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
         LINKTOKEN = LinkTokenInterface(link_token_contract);
         s_owner = msg.sender;
         //Create a new subscription when you deploy the contract.
         createNewSubscription();
+        factoryAddress = _factoryAddress;
     }
 
-    function createflips()public {
-        chainlinkVRF userRoll = new chainlinkVRF(s_subscriptionId);
+    function createflips()public returns (address){
+        chainlinkVRF userRoll = new chainlinkVRF(s_subscriptionId, factoryAddress);
         UserArray.push(userRoll);
         latestContract = address(userRoll);
         // userAddressToContractAddress[msg.sender] = address(userRoll);
         addConsumer(address(userRoll));
+
+        return address(userRoll);
     }
 
     // Assumes the subscription is funded sufficiently.
-    function requestRandomWords() external onlyOwner {
+    function requestRandomWords() external {
         // Will revert if subscription is not set and funded.
         s_requestId = COORDINATOR.requestRandomWords(
             keyHash,

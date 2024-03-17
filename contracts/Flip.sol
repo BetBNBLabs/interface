@@ -3,6 +3,7 @@ pragma solidity ^0.8.18;
 
 import "./library.sol";
 import "./Ichainlink.sol";
+import "./IflipFactory.sol";
 
 contract Flip {
 
@@ -10,15 +11,23 @@ contract Flip {
     address public chainlink;
     Ichainlink GreeterContract; 
 
+    address public factoryContractAddress;
+    IflipFactory FlipFactory;
+
     // 0xC83BF0315121E03544Fc71589EfA2BAc1334A6d1
     // 0x97d3fDf05741AaF69A49A819E21A0eEfc5B95A01
 
     constructor(address user,
-     address _chainlinkContractAddress
+     address _chainlinkContractAddress,
+     address _factoryContractAddress
     ){
         owner = user;
+
         chainlink = _chainlinkContractAddress;
         GreeterContract = Ichainlink(address(chainlink));
+
+        factoryContractAddress = _factoryContractAddress;
+        FlipFactory = IflipFactory(address(factoryContractAddress));
     }
 
 
@@ -29,6 +38,7 @@ contract Flip {
     uint256 public looseCount = 0;
     uint256 public winCount = 0;
     bool[] public streakArray;
+    uint256 public requestId;
     
     // State variable to store the current coin value
     // Event emitted when the coin value is updated
@@ -55,12 +65,14 @@ contract Flip {
     }
 
     function sudoProbability() public view returns (uint256) {
-        // bytes32 hash = keccak256(abi.encodePacked(block.number, block.timestamp, blockhash(block.number - 1),probWin, probLose, looseCount, winCount, owner));
-        bool value;
-        uint256[] memory resultt;
-        (value, resultt) = getGetRequestStatus();
-        uint256 hash = resultt[0];
+        // bytes32 hash = keccak256(abi.encodePacked(block.number, block.timestamp, 
+        // blockhash(block.number - 1),probWin, probLose, looseCount, winCount, owner));
+        // bool value;
+        // uint256[] memory resultt;
+        // (value, resultt) = getGetRequestStatus();
+        // uint256 hash = resultt[0];
         // Convert the hash to a uint8 value (0 or 1)
+        uint256 hash= updateHash();
         uint8 result = uint8(uint256(hash)) % 2;
         uint256 prob_Win = probWin;
         uint256 prob_Lose = 1000 - prob_Win;
@@ -85,26 +97,35 @@ contract Flip {
 
     // Function to generate a pseudo-random floating-point number between 0 to 100
     function generateRandomFloat() public view returns (uint256) {
-        // bytes32 hash = keccak256(abi.encodePacked(block.number, block.timestamp, blockhash(block.number - 1),probWin, probLose, looseCount, winCount, owner));
-         bool value;
-        uint256[] memory resultt;
-        (value, resultt) = getGetRequestStatus();
-        uint256 hash = resultt[0];
+        // bytes32 hash = keccak256(abi.encodePacked(block.number, block.timestamp, 
+        // blockhash(block.number - 1),probWin, probLose, looseCount, winCount, owner));
+        //  bool value;
+        // uint256[] memory resultt;
+        // (value, resultt) = getGetRequestStatus();
+        // uint256 hash = resultt[0];
         // Convert the hash to a uint256 value and normalize it to be between 0 and 1
+        uint256 hash= updateHash();
         uint256 randomNumber = uint256(hash) % 1000000;
         uint256 randomFloat = uint256(randomNumber) / 1000;
         return randomFloat;
     }
-
-    function oneXwins(coin.Coin _newCoin, uint256 prob_LoseGivenWin) public returns(bool, uint256){
+    uint256 public amount;
+    uint8 public variable;
+    function oneXwins(coin.Coin _newCoin, uint256 prob_LoseGivenWin, uint256 _amount) public {
         currentCoin = _newCoin;
         probLoseGivenWin = prob_LoseGivenWin;
+        amount =  _amount;
+        variable = 1;
+        oneXcompute();
+        getRequestRandomWords(variable);
+    }
+
+    function oneXcompute()public returns(bool, uint256){
         uint256 psudoWinProb = sudoProbability();
         uint256 actualProb = generateRandomFloat();
         bool results = actualProb < psudoWinProb;
         streakArray.push(results);
         uint256 winStreak = currentWinStreak();
-
         if(results == true){
             // Player wins
             probLose = probLose + (probWin * probLoseGivenWin)/100;
@@ -124,12 +145,20 @@ contract Flip {
             usertoWinCount[owner] = looseCount++;
         }
         // currentWinStreak();
+        FlipFactory.finalCompute(results, amount, winStreak, variable, owner);
         return (results,winStreak) ;
     }
-
-    function fiveXwins(coin.Coin _newCoin, uint256 prob_LoseGivenWin) public returns(bool, uint256){
+    
+    function fiveXwins(coin.Coin _newCoin, uint256 prob_LoseGivenWin, uint256 _amount) public {
         currentCoin = _newCoin;
         probLoseGivenWin = prob_LoseGivenWin;
+        amount =  _amount;
+        variable = 5;
+        fiveXcompute();
+        getRequestRandomWords(variable);
+    }
+
+    function fiveXcompute()public returns(bool, uint256){
         uint256 psudoWinProb = (sudoProbability()/5);
         uint256 actualProb = generateRandomFloat();
         bool results = actualProb < psudoWinProb;
@@ -154,12 +183,20 @@ contract Flip {
             usertoWinCount[owner] = looseCount++;
 
         }
+        FlipFactory.finalCompute(results, amount, winStreak, variable, owner);
         return (results,winStreak);
     }
 
-    function tenXwins(coin.Coin _newCoin, uint256 prob_LoseGivenWin) public returns(bool, uint256){
+    function tenXwins(coin.Coin _newCoin, uint256 prob_LoseGivenWin, uint256 _amount) public {
         currentCoin = _newCoin;
         probLoseGivenWin = prob_LoseGivenWin;
+        amount =  _amount;
+        variable = 10;
+        tenXcompute();
+        getRequestRandomWords(variable);
+    }
+
+    function tenXcompute()public returns(bool, uint256){
         uint256 psudoWinProb = (sudoProbability()/10);
         uint256 actualProb = generateRandomFloat();
         bool results = actualProb < psudoWinProb;
@@ -184,35 +221,40 @@ contract Flip {
             usertoWinCount[owner] = looseCount++;
 
         }
+        FlipFactory.finalCompute(results, amount, winStreak, variable, owner);
         return (results,winStreak);
     }
-
-    uint256 public requestID;
 
     function updateChainlink(address _chainlinkAddress) public {
         chainlink = _chainlinkAddress;
     }
 
-    function getRequestRandomWords() public returns(uint256){
+    function getRequestRandomWords(uint8) public returns(uint256){
         // chainlinkVRF flip  = chainlinkVRF(chainlink);
-        requestID = GreeterContract.requestRandomWords();
-        return requestID;
+        requestId = GreeterContract.requestRandomWords(variable);
+        return requestId;
     }
-    // uint256 public hello;
-    // function getGetRequestStatus() public returns(bool fulfilled, uint256[] memory randomWords){
-    // bool value ;
-    // uint256[] memory result;
-    //     (value, result) = GreeterContract.getRequestStatus(requestID);
-    //     hello = result[0];
-    //     return(value, result);
-    // }
+    
 
     function getGetRequestStatus() public view returns(bool fulfilled, uint256[] memory randomWords){
     bool value ;
     uint256[] memory result;
-        (value, result) = GreeterContract.getRequestStatus(requestID);
+        (value, result) = GreeterContract.getRequestStatus(requestId);
         // hello = result[0];
         return(value, result);
+    }
+    
+    // uint256 public hash;
+    // function setRandomnumber(uint256[] memory _randomWords) public returns(uint256) {
+    //     uint256 hash = _randomWords[0];
+    //     return hash;
+    // }
+
+    function updateHash() public view returns(uint256) {
+        (bytes32 xyz) = keccak256(abi.encodePacked(block.number, block.timestamp, 
+        blockhash(block.number - 1),probWin, probLose, looseCount, winCount, owner));
+        uint256 hash = uint256(xyz);
+        return hash;
     }
 
 

@@ -1,10 +1,12 @@
-const bnbAddress = ``;
+const bnbAddress = `0x8fC7c67AdeB681f3077e17a8256dEd2B23a1Cd72`;
+const bnbCustomTokenAddress = `0x91E714f998B1AAe75b133E0467b5FAA2783f5D0A`
 
 const polygonAddress = `0xA53C379D54E910F54626C062f691edBD24C7D4bD`;
 const polygonCustomTokenAddress = `0xD3D083464D63a6a0d78a0DdE1F804e7233e8d977`
 
 const sepoliaAddress = `0x3F79108E948aac1e13e09823dBE49f2F048b312d`;
 const sepoliaCustomTokenAddress = `0x7d0A0087543B8Dd1725B907bF523a5D7103adfB8`
+
 
 
 export const addressFactory = sepoliaAddress;
@@ -46,6 +48,50 @@ export const abiApproveFunction = `
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "_value",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "winStreak",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_variable",
+				"type": "uint8"
+			},
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "finalCompute",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
@@ -64,12 +110,6 @@ export const abiApproveFunction = `
 				"internalType": "enum coin.Coin",
 				"name": "newCoin",
 				"type": "uint8"
-			},
-			{
-				"indexed": false,
-				"internalType": "bool",
-				"name": "value",
-				"type": "bool"
 			}
 		],
 		"name": "CoinFlipped",
@@ -89,6 +129,12 @@ export const abiApproveFunction = `
 				"internalType": "uint256",
 				"name": "winStreak",
 				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "value",
+				"type": "bool"
 			}
 		],
 		"name": "CoinStreak",
@@ -104,7 +150,7 @@ export const abiApproveFunction = `
 	{
 		"inputs": [
 			{
-				"internalType": "enum factory.Multiplier",
+				"internalType": "enum coin.Multiplier",
 				"name": "_multi",
 				"type": "uint8"
 			},
@@ -119,25 +165,14 @@ export const abiApproveFunction = `
 				"type": "uint8"
 			}
 		],
-		"name": "flipaCoin",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"name": "flipACoin",
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "getContractAddress",
+		"name": "getChainlinkContractAddress",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -165,6 +200,25 @@ export const abiApproveFunction = `
 		"inputs": [],
 		"name": "getsubscriptionId",
 		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "_randomWords",
+				"type": "uint256[]"
+			}
+		],
+		"name": "randomnumber",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -249,6 +303,19 @@ export const abiApproveFunction = `
 	},
 	{
 		"inputs": [],
+		"name": "factoryAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "GetAllowance",
 		"outputs": [
 			{
@@ -269,6 +336,19 @@ export const abiApproveFunction = `
 			}
 		],
 		"name": "GetUserTokenBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "hievk",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -326,6 +406,25 @@ export const abiApproveFunction = `
 				"internalType": "uint64",
 				"name": "",
 				"type": "uint64"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "userAddressToChainlinkContractAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
