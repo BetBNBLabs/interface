@@ -206,7 +206,7 @@ const Game = () => {
 
                 <div>
                     <div className="flex justify-center items-center mt-10">
-                        <span className="text-[#C4C4C4] text-md">
+                        <span className="text-[#C4C4C4] text-sm md:text-base">
                             Select reward (More reward means more risk)
                         </span>
                     </div>
