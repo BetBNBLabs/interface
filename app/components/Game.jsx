@@ -5,6 +5,8 @@ import { useState } from "react";
 import { createAccount, isExistingUser, flipACoin } from "@/utils";
 import styles from "./CoinFlip.module.css"; // Import CSS module for styling
 import { ethers } from "ethers";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   addressFactory,
   abiFactory,
@@ -13,11 +15,14 @@ import {
   jsonRPC,
   RPCKey
 } from "../../config";
+import Won from "./Won";
+import Lost from "./Lost";
 
 const Game = () => {
     const [result, setResult] = useState(null);
     const [flipping, setFlipping] = useState(false);
-
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showFailure, setShowFailure] = useState(false);
     // const flipCoin = () => {
     //     setFlipping(true);
     //     setTimeout(() => {
@@ -73,6 +78,12 @@ const Game = () => {
         setResult(result);
         // setLoading(false);
         setFlipping(false);
+        if (result){
+          setShowSuccess(true) 
+        }
+        else{
+          setShowFailure(true)
+        }
     }
 
     return (
@@ -195,7 +206,7 @@ const Game = () => {
 
                 <div>
                     <div className="flex justify-center items-center mt-10">
-                        <span className="text-[#C4C4C4]">
+                        <span className="text-[#C4C4C4] text-md">
                             Select reward (More reward means more risk)
                         </span>
                     </div>
@@ -239,6 +250,13 @@ const Game = () => {
                     </div>
                 </div>
             </div>
+            {showSuccess ? <Won isOpen={true} onClose={()=>{
+              setShowSuccess(false)
+            }}/> : <></>}
+            {showFailure ? <Lost isOpen={true} onClose={()=>{
+              setShowFailure(false)
+            }}/> : <></>}
+
         </div>
     );
 };

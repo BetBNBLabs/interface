@@ -4,13 +4,19 @@ import Image from "next/image";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Dropdown from "./DropDown";
 import DropUp from './DropUp';
+import Menu from "./Menu";
 
 const Layer = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showDropdown1, setShowDropdown1] = useState(false);
+  const [showDropdown2, setShowDropdown2] = useState(false);
 
+
+  const toggleDropdown2 = () => {
+    setShowDropdown2(!showDropdown2);
+  };
   const toggleDropdown1 = () => {
       setShowDropdown1(!showDropdown1);
     };
@@ -27,6 +33,10 @@ const Layer = () => {
     setTimeout(() => {
       setIsOpen(isOpen);
     }, 5000);
+  };
+
+  const handleClick = () => {
+    setToggle(!Toggle);
   };
 
   const sections = [
@@ -95,6 +105,22 @@ const Layer = () => {
                 toggleDropdown1={toggleDropdown1}
               />
             )}
+            
+            <button className="ml-8" onClick={toggleDropdown2}>
+     <Image src="/hamburger.png" height={30} width={30}/>
+        
+        </button> 
+
+        {showDropdown2 && (
+              <Menu
+                isOpen={showDropdown2}
+                toggleDropdown1={toggleDropdown2}
+              />
+            )}
+
+               
+
+
           </div>
 
      
