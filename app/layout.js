@@ -1,12 +1,15 @@
 "use client";
 import { Inter } from "next/font/google";
 import "./globals.css";
-const inter = Inter({ subsets: ["latin"] });
 import localFont from "@next/font/local";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Providers } from "./providers";
+import { Poppins } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
-const myFont = localFont({ src: "./King-Gaming.woff2" });
+const myFont = localFont({ src: "./BrantFord.woff2" });
+const poppins = Poppins({   weight: ['400','600','800'],
+subsets: ['latin'] })
 
 // export const metadata = {
 //     title: "Create Next App",

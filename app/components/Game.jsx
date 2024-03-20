@@ -99,11 +99,11 @@ const Game = () => {
                     </div>
 
                     <button
-                        className="bg-[#F86939] text-white font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#F86939] text-white py-2 px-4 rounded-full mb-2 font-extrabold"
                         onClick={flipCoinCall}
                         // onClick={() => {flipCoin()}}
                     >
-                        Flip Coin
+                        <span className="tracking-widest font-extrabold">Flip Coin</span>
                     </button>
                 </div>
             </div>
