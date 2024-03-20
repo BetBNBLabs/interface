@@ -21,11 +21,11 @@
   }
   
   .tails {
-    background-image: url('/Head.svg'); /* Path to the image for tails */
+    background-image: url('/tail.svg'); /* Path to the image for tails */
   }
   
   .flipping {
-    animation: flip 2s linear;
+    animation: flip 2s linear infinite;
   }
   
   @keyframes flip {

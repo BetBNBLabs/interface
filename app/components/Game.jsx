@@ -23,15 +23,7 @@ const Game = () => {
     const [flipping, setFlipping] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showFailure, setShowFailure] = useState(false);
-    // const flipCoin = () => {
-    //     setFlipping(true);
-    //     setTimeout(() => {
-    //         const randomNumber = Math.random();
-    //         const coinResult = randomNumber < 0.5 ? "Heads" : "Tails";
-    //         setResult(coinResult);
-    //         setFlipping(false);
-    //     }, 2000); // Simulating a coin flip animation
-    // };
+   
 
     const [inputs, setInputs] = useState({
         multiplier: "0",
@@ -57,7 +49,14 @@ const Game = () => {
           console.log("results:", info.results)
           // console.log("results info:", info.value.toString())
           setResult(info.results)
+          if (info.results == true){
+            setShowSuccess(true) 
+          }
+          else{
+            setShowFailure(true)
+          }
       }) 
+      
   }
   
   listenToResult()
@@ -76,16 +75,12 @@ const Game = () => {
             inputs.coinSide
         );
         setResult(result);
-        // setLoading(false);
         setFlipping(false);
-        if (result){
-          setShowSuccess(true) 
-        }
-        else{
-          setShowFailure(true)
-        }
     }
+   
+  
 
+ 
     return (
         <div className="flex flex-col justify-center items-center min-h-[80vh] gap-[10%]">
             <div className="flex justify-center items-center flex-col">
