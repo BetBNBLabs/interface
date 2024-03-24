@@ -23,7 +23,7 @@ const Game = () => {
     const [flipping, setFlipping] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showFailure, setShowFailure] = useState(false);
-   
+   const [customAmount, setCustomAmount] = useState("Custom Amount")
 
     const [inputs, setInputs] = useState({
         multiplier: "0",
@@ -176,9 +176,10 @@ const Game = () => {
                     </button>
                     <button
                         className={`bg-outline border-white border  hover:bg-white hover:text-black font-bold py-2 px-4 ml-8 rounded-full ${
-                            inputs.amount !== "0.1" &&
+                            (inputs.amount !== "0.1" &&
                             inputs.amount !== "0.5" &&
-                            inputs.amount !== "1"
+                            inputs.amount !== "1") || 
+                            inputs.amount === "Custom Amount"
                                 ? "bg-white text-black"
                                 : "text-white"
                         }`}
@@ -186,16 +187,21 @@ const Game = () => {
                             const customAmount = prompt("Enter custom amount:");
                             if (customAmount !== null) {
                                 setInputs({ ...inputs, amount: customAmount });
+                                setCustomAmount(customAmount + " BNB")
                             }
                         }}
                     >
-                        {inputs.amount === "0.1" ||
+
+                      
+                        {/* {inputs.amount === "0.1" ||
                         inputs.amount === "0.5" ||
                         inputs.amount === "1"
                             ? inputs.amount + " BNB"
                             : inputs.amount !== ""
                             ? inputs.amount + " BNB (Custom)"
-                            : "Custom amount"}
+                            : "Custom amount"} */}
+
+                            {customAmount}
                     </button>
                 </div>
 
