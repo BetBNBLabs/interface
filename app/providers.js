@@ -8,7 +8,11 @@ import * as React from "react";
 const config = getDefaultConfig({
     appName: "My RainbowKit App",
     projectId: "95f8ce26a83baf6d9b6db95a07e082a1",
-    chains: [bscTestnet, polygonMumbai, bsc],
+    chains: [
+        bscTestnet,
+        // polygonMumbai,
+        // bsc
+    ],
     ssr: false, // If your dApp uses server side rendering (SSR)
 });
 

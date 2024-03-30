@@ -6,8 +6,6 @@ import {
     abiFactory,
     addressCustomToken,
     abiApproveFunction,
-    jsonRPC,
-    RPCKey
 } from "./config";
 
 export async function getUserAddress() {
@@ -18,16 +16,19 @@ export async function getUserAddress() {
 }
 
 async function getFlipFactoryContract(providerOrSigner) {
-    const modal = new web3modal();
-    const connection = await modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
+    // const modal = new web3modal();
+    // const connection = await modal.connect();
+    // const provider = new ethers.providers.Web3Provider(connection);
+    // It will prompt user for account connections if it isnt connected
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    
     const contract = new ethers.Contract(
         addressFactory,
         abiFactory,
         provider
     );
     if (providerOrSigner == true) {
-        const signer = provider.getSigner();
+        const signer = await provider.getSigner();
         const contract = new ethers.Contract(
             addressFactory,
             abiFactory,
@@ -55,10 +56,11 @@ export async function createAccount() {
 }
 
 export async function approveToken(_spender, _amount) {
-    const modal = new web3modal();
-    const connection = await modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
+    // const modal = new web3modal();
+    // const connection = await modal.connect();
+    // const provider = new ethers.providers.Web3Provider(connection);
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer =  await provider.getSigner();
     const contract = new ethers.Contract(
         addressCustomToken,
         abiApproveFunction,
@@ -72,7 +74,7 @@ export async function approveToken(_spender, _amount) {
 export async function flipACoin(_multiplier, _amount, _coinSide) {
     const contract = await getFlipFactoryContract(true)
     console.log("ethers amount: ", _amount.toString())
-    const weiAmount = ethers.utils.parseEther(_amount.toString());
+    const weiAmount = ethers.parseEther(_amount, 18);
     console.log("wei amount: ", weiAmount)
 
     // console.log("create account")
@@ -82,7 +84,7 @@ export async function flipACoin(_multiplier, _amount, _coinSide) {
     await approveToken(addressFactory, weiAmount)
 
     const d = await contract.GetAllowance()
-    const d2 = ethers.utils.formatEther(d);
+    const d2 = ethers.formatEther(d);
     console.log("allowance ", d2)
 
     console.log("flipping")
@@ -91,10 +93,12 @@ export async function flipACoin(_multiplier, _amount, _coinSide) {
     , { gasLimit: 1000000, }
     )
     const data = await tx.wait();
-    const data2 = await data.events[1]
+    // const data2 = await data.events[1]
+    // const data3 = await data2.decode;
 
-    console.log("Coin flipped", data);
-    console.log("Coin data2: ", data2);
+    // console.log("Coin flipped", data);
+    console.log("Coin data2: ", data);
+    // console.log("Coin data3: ", data3);
     // console.log("results info:", tx.value.toString())
 }
 

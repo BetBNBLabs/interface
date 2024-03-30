@@ -1,5 +1,5 @@
 
-const bscAddress = `0x8fC7c67AdeB681f3077e17a8256dEd2B23a1Cd72`;
+const bscAddress = `0x4d78d0cB1903f4Df44F120DD6363798cC3eA80Be`;
 const polygonAddress = `0xA53C379D54E910F54626C062f691edBD24C7D4bD`;
 const sepoliaAddress = `0x3F79108E948aac1e13e09823dBE49f2F048b312d`;
 

@@ -1,29 +1,20 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { useState } from "react";
 import { createAccount, isExistingUser, flipACoin } from "@/utils";
-import styles from "./CoinFlip.module.css"; // Import CSS module for styling
-import { ethers } from "ethers";
-import { ToastContainer, toast } from "react-toastify";
+import styles from "./CoinFlip.module.css";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  addressFactory,
-  abiFactory,
-  addressCustomToken,
-  abiApproveFunction,
-  jsonRPC,
-  RPCKey
-} from "../../config";
+import { addressFactory } from "../../config";
 import Won from "./Won";
 import Lost from "./Lost";
+import { WebSocketProvider, Contract } from "ethers";
 
 const Game = () => {
     const [result, setResult] = useState(null);
     const [flipping, setFlipping] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showFailure, setShowFailure] = useState(false);
-   const [customAmount, setCustomAmount] = useState("Custom Amount")
+    const [customAmount, setCustomAmount] = useState("Custom Amount");
 
     const [inputs, setInputs] = useState({
         multiplier: "0",
@@ -31,42 +22,68 @@ const Game = () => {
         coinSide: "0",
     });
 
-    // console.log(inputs);
-
     async function listenToResult() {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const contract = new ethers.Contract(
-          addressFactory,
-          abiFactory,
-          provider
-      );
-      contract.on("CoinStreak", (address, streak, results) => {
-          let info = {
-              address: address,
-              streak: streak,
-              results: results
-          }
-          console.log("results:", info.results)
-          // console.log("results info:", info.value.toString())
-          setResult(info.results)
-          if (info.results == true){
-            setShowSuccess(true) 
-          }
-          else{
-            setShowFailure(true)
-          }
-      }) 
-      
-  }
-  
-  listenToResult()
+        const providerUrl = 'wss://quiet-quick-wind.bsc-testnet.quiknode.pro/7593d9a56a9bf68b6e049a867416791b5e1bfdbb/';
+
+        const eventABI = [
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "User",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "winStreak",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "bool",
+                        "name": "value",
+                        "type": "bool"
+                    }
+                ],
+                "name": "CoinStreak",
+                "type": "event"
+            },
+        ]
+
+        const provider = new WebSocketProvider(providerUrl);
+
+        const contract = new Contract(
+            addressFactory,
+            eventABI,
+            provider
+        );
+
+        contract.on('CoinStreak', (User, winStreak, value) => {
+            console.log('result:', `${User} got ${value} and is on a streak of ${winStreak}`);
+            setResult(value);
+            if (value == true) {
+                setShowSuccess(true);
+            } else {
+                setShowFailure(true);
+            }
+        });
+    }
+
+    listenToResult();
 
     async function flipCoinCall() {
-      console.log("called")
+        // listenToResult()
+        console.log("called");
         setFlipping(true);
         // setLoading(true);
         const isExisting = await isExistingUser();
-        if (isExisting.toString() == "0x0000000000000000000000000000000000000000") {
+        if (
+            isExisting.toString() ==
+            "0x0000000000000000000000000000000000000000"
+        ) {
             await createAccount();
         }
         const result = await flipACoin(
@@ -74,13 +91,11 @@ const Game = () => {
             inputs.amount,
             inputs.coinSide
         );
-        setResult(result);
+        // setResult(result);
         setFlipping(false);
+        await listenToResult()
     }
-   
-  
 
- 
     return (
         <div className="flex flex-col justify-center items-center min-h-[80vh] gap-[10%]">
             <div className="flex justify-center items-center flex-col">
@@ -103,7 +118,9 @@ const Game = () => {
                         onClick={flipCoinCall}
                         // onClick={() => {flipCoin()}}
                     >
-                        <span className="tracking-widest font-extrabold">Flip Coin</span>
+                        <span className="tracking-widest font-extrabold">
+                            Flip Coin
+                        </span>
                     </button>
                 </div>
             </div>
@@ -177,8 +194,8 @@ const Game = () => {
                     <button
                         className={`bg-outline border-white border  hover:bg-white hover:text-black font-bold py-2 px-4 ml-8 rounded-full ${
                             (inputs.amount !== "0.1" &&
-                            inputs.amount !== "0.5" &&
-                            inputs.amount !== "1") || 
+                                inputs.amount !== "0.5" &&
+                                inputs.amount !== "1") ||
                             inputs.amount === "Custom Amount"
                                 ? "bg-white text-black"
                                 : "text-white"
@@ -187,12 +204,10 @@ const Game = () => {
                             const customAmount = prompt("Enter custom amount:");
                             if (customAmount !== null) {
                                 setInputs({ ...inputs, amount: customAmount });
-                                setCustomAmount(customAmount + " BNB")
+                                setCustomAmount(customAmount + " BNB");
                             }
                         }}
                     >
-
-                      
                         {/* {inputs.amount === "0.1" ||
                         inputs.amount === "0.5" ||
                         inputs.amount === "1"
@@ -201,7 +216,7 @@ const Game = () => {
                             ? inputs.amount + " BNB (Custom)"
                             : "Custom amount"} */}
 
-                            {customAmount}
+                        {customAmount}
                     </button>
                 </div>
 
@@ -251,13 +266,26 @@ const Game = () => {
                     </div>
                 </div>
             </div>
-            {showSuccess ? <Won isOpen={true} onClose={()=>{
-              setShowSuccess(false)
-            }}/> : <></>}
-            {showFailure ? <Lost isOpen={true} onClose={()=>{
-              setShowFailure(false)
-            }}/> : <></>}
-
+            {showSuccess ? (
+                <Won
+                    isOpen={true}
+                    onClose={() => {
+                        setShowSuccess(false);
+                    }}
+                />
+            ) : (
+                <></>
+            )}
+            {showFailure ? (
+                <Lost
+                    isOpen={true}
+                    onClose={() => {
+                        setShowFailure(false);
+                    }}
+                />
+            ) : (
+                <></>
+            )}
         </div>
     );
 };
