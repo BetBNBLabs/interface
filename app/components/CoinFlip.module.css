@@ -29,7 +29,7 @@
 }
 
 .flipping {
-  animation: flip 2s linear infinite;
+  animation: flip 2s infinite;
   animation-fill-mode: forwards;
 }
 

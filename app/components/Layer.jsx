@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { approveToken, checkAllowance } from "@/utils";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Dropdown from "./DropDown";
-import DropUp from './DropUp';
+import DropUp from "./DropUp";
 import Menu from "./Menu";
 
 const Layer = () => {
@@ -13,13 +14,31 @@ const Layer = () => {
   const [showDropdown1, setShowDropdown1] = useState(false);
   const [showDropdown2, setShowDropdown2] = useState(false);
 
+  const [customAmount, setCustomAmount] = useState("Custom Amount");
+  const [allowanceN, setAllowanceN] = useState();
+  const [inputs, setInputs] = useState({
+    multiplier: "0",
+    amount: "0.1",
+    coinSide: "0",
+  });
+  useEffect(() => {
+    fetchCheckAllowance();
+  }, []);
+  async function fetchCheckAllowance() {
+    const result = await checkAllowance();
+    setAllowanceN(result);
+  }
+  async function approveCall(_amount) {
+    await approveToken(_amount);
+    await fetchCheckAllowance();
+  }
 
   const toggleDropdown2 = () => {
     setShowDropdown2(!showDropdown2);
   };
   const toggleDropdown1 = () => {
-      setShowDropdown1(!showDropdown1);
-    };
+    setShowDropdown1(!showDropdown1);
+  };
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
   };
@@ -42,11 +61,19 @@ const Layer = () => {
   const sections = [
     {
       heading: "Player Flips",
-      items: ["User69 just flipped and won 69 BNB", "User69 just flipped and won 69 BNB", "User69 just flipped and won 69 BNB"],
+      items: [
+        "User69 just flipped and won 69 BNB",
+        "User69 just flipped and won 69 BNB",
+        "User69 just flipped and won 69 BNB",
+      ],
     },
     {
       heading: "User Flips",
-      items: ["User69 just flipped and won 69 BNB", "User69 just flipped and won 69 BNB", "User69 just flipped and won 69 BNB"],
+      items: [
+        "User69 just flipped and won 69 BNB",
+        "User69 just flipped and won 69 BNB",
+        "User69 just flipped and won 69 BNB",
+      ],
     },
   ];
   return (
@@ -58,13 +85,38 @@ const Layer = () => {
             <ConnectButton chainStatus="icon" accountStatus="avatar" />
           </a>
           <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center"></nav>
+          {/* <div>
+            <button
+              className={`sm:inline-flex items-center hover:bg-white hover:text-black hover:text-base rounded-s-lg border-0 text-sm py-1 px-3 focus:outline-none mt-4 md:mt-0 hidden md:block ${
+                (inputs.amount !== "0.1" &&
+                  inputs.amount !== "0.5" &&
+                  inputs.amount !== "1") ||
+                inputs.amount === "Custom Amount"
+                  ? "bg-white text-black"
+                  : "text-white bg-[#F86939]"
+              }`}
+              onClick={() => {
+                const customAmount = prompt("Enter custom amount:");
+                if (customAmount !== null) {
+                  approveCall(customAmount);
+                }
+              }}
+            >
+              Custom Allowance
+            </button>
+          </div>
+          <div>
+            <button class="sm:inline-flex items-center rounded-r-lg bg-outline border border-white text-white py-1 px-3 text-sm mt-4 md:mt-0 hidden md:block">
+              {allowanceN}
+            </button>
+          </div> */}
           <div dir="ltr">
-            <button class="inline-flex items-center rounded-s-lg bg-[#F86939] border-0 text-white text-sm py-1 px-3 focus:outline-none mt-4 md:mt-0 hidden md:block">
+            <button class="sm:inline-flex items-center rounded-s-lg bg-[#F86939] border-0 text-white text-sm py-1 px-3 focus:outline-none mt-4 md:mt-0 hidden md:block">
               Heads (54%)
             </button>
           </div>
           <div dir="rtl">
-            <button class="inline-flex items-center rounded-s-lg bg-outline border border-white text-white py-1 px-3 text-sm mt-4 md:mt-0 hidden md:block">
+            <button class="sm:inline-flex items-center rounded-s-lg bg-outline border border-white text-white py-1 px-3 text-sm mt-4 md:mt-0 hidden md:block">
               Tails (49%)
             </button>
           </div>
@@ -95,35 +147,24 @@ const Layer = () => {
                 toggleDropdown={toggleDropdown}
               />
             )}
-                <button className="ml-8" onClick={toggleDropdown1}>
-     <Image src="/game.svg" height={40} width={40}/>
-        
-        </button> 
-        {showDropdown1 && (
+            <button className="ml-8" onClick={toggleDropdown1}>
+              <Image src="/game.svg" height={40} width={40} />
+            </button>
+            {showDropdown1 && (
               <DropUp
                 isOpen={showDropdown1}
                 toggleDropdown1={toggleDropdown1}
               />
             )}
-            
+
             <button className="ml-8" onClick={toggleDropdown2}>
-     <Image src="/hamburger.png" height={30} width={30}/>
-        
-        </button> 
+              <Image src="/hamburger.png" height={30} width={30} />
+            </button>
 
-        {showDropdown2 && (
-              <Menu
-                isOpen={showDropdown2}
-                toggleDropdown1={toggleDropdown2}
-              />
+            {showDropdown2 && (
+              <Menu isOpen={showDropdown2} toggleDropdown1={toggleDropdown2} />
             )}
-
-               
-
-
           </div>
-
-     
         </div>
       </header>
     </div>

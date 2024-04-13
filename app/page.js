@@ -25,7 +25,7 @@ export default function Home() {
       <Disclaimer isOpen={isPopupOpen} onClose={closePopup} />
       <Won onClose={closePopup} />
 
-        <Navbar />
+        {/* <Navbar /> */}
         <Layer />
         <Game />
       </div>
