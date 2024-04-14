@@ -117,13 +117,13 @@ const Game = () => {
 
           <div className="flex flex-col justify-center">
             <button
-              className={`text-center hover:bg-transparent bg-outline hover:text-white border-white border  bg-white text-black font-bold py-2 px-4 rounded-full ${
+              className={`text-center bg-outline hover:bg-gray-100 hover:bg-opacity-20 hover:backdrop-blur-md hover:shadow-3xl hover:text-white bg-white text-black font-bold py-2 px-4 rounded-full ${
                 (inputs.amount !== "0.1" &&
                   inputs.amount !== "0.5" &&
                   inputs.amount !== "1") ||
                 inputs.amount === "Custom Amount"
-                // ? "bg-white text-black"
-                // : "text-white"
+                ? "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
+                : "bg-white text-black"
               }`}
               onClick={() => {
                 const customAmount = prompt("Enter custom amount:");
@@ -153,16 +153,16 @@ const Game = () => {
           <span className="text-[#C4C4C4] text-center">Select outcome</span>
           <div className="flex justify-center items-left mt-5">
             <button
-              className={`bg-outline border ${
-                inputs.coinSide === "0" ? "bg-white text-black" : "text-white"
+              className={`bg-outline w-[6rem] tracking-widest ${
+                inputs.coinSide === "0" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               } font-bold py-2 px-4 mr-4 rounded-full hover:text-black hover:bg-white`}
               onClick={() => setInputs({ ...inputs, coinSide: "0" })}
             >
               Heads
             </button>
             <button
-              className={`bg-outline border ${
-                inputs.coinSide === "1" ? "bg-white text-black" : "text-white"
+              className={`bg-outline w-[6rem] tracking-widest ${
+                inputs.coinSide === "1" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               } font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black`}
               onClick={() => setInputs({ ...inputs, coinSide: "1" })}
             >
@@ -175,37 +175,43 @@ const Game = () => {
         </div>
         <div className="flex justify-center items-left mt-4">
           <button
-            className={`bg-outline  ml-4 border-white border font-bold py-2 px-4 mr-4 rounded-full ${
-              inputs.amount === "0.1" ? "bg-white text-black" : "text-white"
+            className={`bg-outline hover:bg-white hover:text-black ml-4 font-bold py-2 px-4 mr-4 rounded-full ${
+              inputs.amount === "0.1"
+                ? "bg-white text-black"
+                : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
             }`}
             onClick={() => setInputs({ ...inputs, amount: "0.1" })}
           >
             .1 BETBNB
           </button>
           <button
-            className={`bg-outline  ml-4 border-white border font-bold py-2 px-4 rounded-full ${
-              inputs.amount === "0.5" ? "bg-white text-black" : "text-white"
+            className={`bg-outline hover:bg-white hover:text-black ml-4 font-bold py-2 px-4 rounded-full ${
+              inputs.amount === "0.5"
+                ? "bg-white text-black"
+                : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
             }`}
             onClick={() => setInputs({ ...inputs, amount: "0.5" })}
           >
             .5 BETBNB
           </button>
           <button
-            className={`bg-outline border-white border font-bold py-2 px-4 ml-8 rounded-full ${
-              inputs.amount === "1" ? "bg-white text-black" : "text-white"
+            className={`bg-outline hover:bg-white hover:text-black font-bold py-2 px-4 ml-8 rounded-full ${
+              inputs.amount === "1"
+                ? "bg-white text-black"
+                : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
             }`}
             onClick={() => setInputs({ ...inputs, amount: "1" })}
           >
             1 BETBNB
           </button>
           <button
-            className={`bg-outline border-white border  hover:bg-white hover:text-black font-bold py-2 px-4 ml-8 rounded-full ${
+            className={`bg-outline hover:bg-white hover:text-black font-bold py-2 px-4 ml-8 rounded-full ${
               (inputs.amount !== "0.1" &&
                 inputs.amount !== "0.5" &&
                 inputs.amount !== "1") ||
               inputs.amount === "Custom Amount"
                 ? "bg-white text-black"
-                : "text-white"
+                : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
             }`}
             onClick={() => {
               const customAmount = prompt("Enter custom amount:");
@@ -235,24 +241,24 @@ const Game = () => {
           </div>
           <div className="flex	justify-center items-left mt-4">
             <button
-              className={`bg-outline border border-white  font-bold py-2 px-4 mr-4 rounded-full hover:bg-white hover:text-black ${
-                inputs.multiplier === "0" ? "bg-white text-black" : "text-white"
+              className={`bg-outline font-bold py-2 px-4 mr-4 rounded-full hover:bg-white hover:text-black ${
+                inputs.multiplier === "0" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               }`}
               onClick={() => setInputs({ ...inputs, multiplier: "0" })}
             >
               1x
             </button>
             <button
-              className={`bg-outline  ml-4 border-white border font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black ${
-                inputs.multiplier === "1" ? "bg-white text-black" : "text-white"
+              className={`bg-outline  ml-4 font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black ${
+                inputs.multiplier === "1" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               }`}
               onClick={() => setInputs({ ...inputs, multiplier: "1" })}
             >
               5x
             </button>
             <button
-              className={`bg-outline border border-white  font-bold py-2 px-4 ml-8 rounded-full hover:text-black hover:bg-white ${
-                inputs.multiplier === "2" ? "bg-white text-black" : "text-white"
+              className={`bg-outline font-bold py-2 px-4 ml-8 rounded-full hover:text-black hover:bg-white ${
+                inputs.multiplier === "2" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               }`}
               onClick={() => setInputs({ ...inputs, multiplier: "2" })}
             >

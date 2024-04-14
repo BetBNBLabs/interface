@@ -10,7 +10,7 @@ const Dropdown = ({ sections }) => {
   };
 
   return (
-    <div className="dropdown bg-black glass-container rounded-lg absolute md:left-[55%] lg:left-[70%] mt-4">
+    <div className="dropdown bg-black glass-container rounded-lg absolute md:left-[55%] lg:left-[70%] mt-12">
       <div className="flex">
         {sections.map((section, index) => (
           <div key={index} className="flex flex-col mr-4">

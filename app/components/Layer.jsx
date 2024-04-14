@@ -122,7 +122,7 @@ const Layer = () => {
           </div>
           <div className="ml-6 inline-flex">
             <button
-              class="flex items-center bg-[#303030] border border-gray-300 text-white font-medium py-2 px-3 rounded-full focus:outline-none"
+              class="flex items-center bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white font-medium py-2 px-3 rounded-full focus:outline-none"
               onClick={toggleDropdown}
             >
               <span>Recent</span>
@@ -148,7 +148,7 @@ const Layer = () => {
               />
             )}
             <button className="ml-8" onClick={toggleDropdown1}>
-              <Image src="/game.svg" height={40} width={40} />
+              <Image src="/game.svg" height={40} width={40} alt="betbnb"/>
             </button>
             {showDropdown1 && (
               <DropUp

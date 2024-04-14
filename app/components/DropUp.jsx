@@ -8,7 +8,7 @@ const DropUp = () => {
     };
   
     return (
-      <div className="absolute md:left-[55%] lg:left-[98%] mt-4 text-left ">
+      <div className="absolute md:left-[55%] lg:left-[98%] mt-12 text-left ">
        
   
    

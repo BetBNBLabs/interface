@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import styles from "./CoinFlip.module.css";
 import { flipCoin } from "@/utils";
+import Image from "next/image";
 
 const Flip = ({ isOpen, onClose }) => {
   const [flipping, setFlipping] = useState(false);
@@ -26,8 +27,15 @@ const Flip = ({ isOpen, onClose }) => {
       <div className="bg-gray-900 bg-opacity-50 backdrop-blur-md shadow-lg text-white rounded-2xl p-6 w-50 mx-auto outline-none text-center">
         <div className="modal flex flex-col items-center justify-center">
           <div className={`${styles.coinInner} ${styles.flipping}`}>
-            <div className={`${styles.coinFace} ${styles.heads}`}></div>
-            <div className={`${styles.coinFace} ${styles.tails}`}></div>
+            {/* <div className={`${styles.coinFace} ${styles.heads}`}></div>
+            <div className={`${styles.coinFace} ${styles.tails}`}></div> */}
+            <Image
+              src={"/flipEth.gif"}
+              width={250}
+              height={250}
+              alt="ethflip"
+              className=""
+            />
           </div>
         </div>
         {/* <button
