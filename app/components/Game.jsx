@@ -104,32 +104,35 @@ const Game = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="flex justify-center w-full items-center flex-col">
-        <div className="flex flex-col w-[90%] items-center gap-4">
-          <div className="flex flex-col justify-center items-start w-full">
-            <h4 className="text-white text-lg text-center">
-              Current Allowance: <span className="text-2xl text-green-400 font-bold">{allowanceN}</span>
-            </h4>
-            <button
-              className={`text-center bg-outline hover:bg-gray-100 hover:bg-opacity-20 hover:backdrop-blur-md hover:shadow-3xl hover:text-white bg-white text-black font-bold py-2 px-4 rounded-full ${
-                (inputs.amount !== "0.1" &&
-                  inputs.amount !== "0.5" &&
-                  inputs.amount !== "1") ||
-                inputs.amount === "Custom Amount"
-                  ? "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
-                  : "bg-white text-black"
-              }`}
-              onClick={() => {
-                const customAmount = prompt("Enter custom amount:");
-                if (customAmount !== null) {
-                  approveCall(customAmount);
-                }
-              }}
-            >
-              Custom Allowance
-            </button>
-          </div>
+      <div className="flex flex-col justify-center items-start w-[90%]">
+        <h4 className="text-white text-lg text-center">
+          Current Allowance:{" "}
+          <span className="text-2xl text-green-400 font-bold">
+            {allowanceN}
+          </span>
+        </h4>
+        <button
+          className={`text-center bg-outline hover:bg-gray-100 hover:bg-opacity-20 hover:backdrop-blur-md hover:shadow-3xl hover:text-white bg-white text-black font-bold py-2 px-4 rounded-full ${
+            (inputs.amount !== "0.1" &&
+              inputs.amount !== "0.5" &&
+              inputs.amount !== "1") ||
+            inputs.amount === "Custom Amount"
+              ? "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
+              : "bg-white text-black"
+          }`}
+          onClick={() => {
+            const customAmount = prompt("Enter custom amount:");
+            if (customAmount !== null) {
+              approveCall(customAmount);
+            }
+          }}
+        >
+          Custom Allowance
+        </button>
+      </div>
 
+      <div className="flex justify-center w-full items-center flex-col mt-4">
+        <div className="flex flex-col items-center gap-4">
           <button
             className="bg-[#F86939] text-white py-2 px-4 w-40 rounded-full mb-2 font-extrabold"
             onClick={flipCoinCall}
@@ -165,10 +168,10 @@ const Game = () => {
             </button>
           </div>
         </div>
-        <div className="flex justify-center items-center mt-2">
+        <div className="flex flex-wrap justify-center items-center mt-2">
           <span className="text-[#C4C4C4]">Select Price</span>
         </div>
-        <div className="flex justify-center items-left mt-4">
+        <div className="flex flex-wrap gap-3 justify-center items-left mt-4">
           <button
             className={`bg-outline hover:bg-white hover:text-black ml-4 font-bold py-2 px-4 mr-4 rounded-full ${
               inputs.amount === "0.1"
@@ -234,7 +237,7 @@ const Game = () => {
               Select reward (More reward means more risk)
             </span>
           </div>
-          <div className="flex	justify-center items-left mt-4">
+          <div className="flex	justify-center items-left mt-4 mb-6">
             <button
               className={`bg-outline font-bold py-2 px-4 mr-4 rounded-full hover:bg-white hover:text-black ${
                 inputs.multiplier === "0"

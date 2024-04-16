@@ -78,8 +78,8 @@ const Layer = () => {
   ];
   return (
     <div>
-      <header class=" body-font">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <header class=" body-font flex justify-center items-center">
+        <div class="flex flex-wrap py-5 flex-col md:flex-row items-center w-[90%]">
           <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
             {/* <span class="ml-3 text-xl">No wallet selected</span> */}
             <ConnectButton chainStatus="icon" accountStatus="avatar" />
