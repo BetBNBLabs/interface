@@ -30,7 +30,7 @@ const Flip = ({ isOpen, onClose }) => {
             {/* <div className={`${styles.coinFace} ${styles.heads}`}></div>
             <div className={`${styles.coinFace} ${styles.tails}`}></div> */}
             <Image
-              src={"/flipEth.gif"}
+              src={"/coinToss.gif"}
               width={250}
               height={250}
               alt="ethflip"

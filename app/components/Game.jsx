@@ -103,27 +103,21 @@ const Game = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-[80vh] gap-[10%]">
-      <div className="flex justify-center items-center flex-col">
-        <div className="flex flex-col items-center gap-4">
-          {/* <div
-            className={`${styles.coinInner} ${
-              flipping ? styles.flipping : "animate-none"
-            }`}
-          >
-            <div className={`${styles.coinFace} ${styles.heads}`}></div>
-            <div className={`${styles.coinFace} ${styles.tails}`}></div>
-          </div> */}
-
-          <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center items-center">
+      <div className="flex justify-center w-full items-center flex-col">
+        <div className="flex flex-col w-[90%] items-center gap-4">
+          <div className="flex flex-col justify-center items-start w-full">
+            <h4 className="text-white text-lg text-center">
+              Current Allowance: <span className="text-2xl text-green-400 font-bold">{allowanceN}</span>
+            </h4>
             <button
               className={`text-center bg-outline hover:bg-gray-100 hover:bg-opacity-20 hover:backdrop-blur-md hover:shadow-3xl hover:text-white bg-white text-black font-bold py-2 px-4 rounded-full ${
                 (inputs.amount !== "0.1" &&
                   inputs.amount !== "0.5" &&
                   inputs.amount !== "1") ||
                 inputs.amount === "Custom Amount"
-                ? "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
-                : "bg-white text-black"
+                  ? "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
+                  : "bg-white text-black"
               }`}
               onClick={() => {
                 const customAmount = prompt("Enter custom amount:");
@@ -134,13 +128,10 @@ const Game = () => {
             >
               Custom Allowance
             </button>
-            <h4 className="text-white text-center">
-              Current Allowance: {allowanceN}
-            </h4>
           </div>
 
           <button
-            className="bg-[#F86939] text-white py-2 px-4 rounded-full mb-2 font-extrabold"
+            className="bg-[#F86939] text-white py-2 px-4 w-40 rounded-full mb-2 font-extrabold"
             onClick={flipCoinCall}
           >
             <span className="tracking-widest font-extrabold">Flip Coin</span>
@@ -154,7 +145,9 @@ const Game = () => {
           <div className="flex justify-center items-left mt-5">
             <button
               className={`bg-outline w-[6rem] tracking-widest ${
-                inputs.coinSide === "0" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
+                inputs.coinSide === "0"
+                  ? "bg-white text-black"
+                  : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               } font-bold py-2 px-4 mr-4 rounded-full hover:text-black hover:bg-white`}
               onClick={() => setInputs({ ...inputs, coinSide: "0" })}
             >
@@ -162,7 +155,9 @@ const Game = () => {
             </button>
             <button
               className={`bg-outline w-[6rem] tracking-widest ${
-                inputs.coinSide === "1" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
+                inputs.coinSide === "1"
+                  ? "bg-white text-black"
+                  : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               } font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black`}
               onClick={() => setInputs({ ...inputs, coinSide: "1" })}
             >
@@ -242,7 +237,9 @@ const Game = () => {
           <div className="flex	justify-center items-left mt-4">
             <button
               className={`bg-outline font-bold py-2 px-4 mr-4 rounded-full hover:bg-white hover:text-black ${
-                inputs.multiplier === "0" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
+                inputs.multiplier === "0"
+                  ? "bg-white text-black"
+                  : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               }`}
               onClick={() => setInputs({ ...inputs, multiplier: "0" })}
             >
@@ -250,7 +247,9 @@ const Game = () => {
             </button>
             <button
               className={`bg-outline  ml-4 font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black ${
-                inputs.multiplier === "1" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
+                inputs.multiplier === "1"
+                  ? "bg-white text-black"
+                  : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               }`}
               onClick={() => setInputs({ ...inputs, multiplier: "1" })}
             >
@@ -258,7 +257,9 @@ const Game = () => {
             </button>
             <button
               className={`bg-outline font-bold py-2 px-4 ml-8 rounded-full hover:text-black hover:bg-white ${
-                inputs.multiplier === "2" ? "bg-white text-black" : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
+                inputs.multiplier === "2"
+                  ? "bg-white text-black"
+                  : "bg-gray-100 bg-opacity-20 backdrop-blur-md shadow-3xl text-white"
               }`}
               onClick={() => setInputs({ ...inputs, multiplier: "2" })}
             >
